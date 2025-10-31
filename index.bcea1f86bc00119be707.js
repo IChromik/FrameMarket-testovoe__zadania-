@@ -22,23 +22,9 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `@charset "UTF-8";
-* {
+___CSS_LOADER_EXPORT___.push([module.id, `* {
   margin: 0;
   padding: 0;
-}
-
-:root {
-  /* Основные цвета */
-  --scarlet: #DC2626; /* Алый - для акцентов и действий */
-  --dark: #1F2937; /* Темный - для текста и фона */
-  --white: #FFFFFF; /* Белый - для фона */
-  --light-gray: #F9FAFB; /* Светло-серый - для секций */
-  --text-gray: #6B7280; /* Серый для второстепенного текста */
-  /* Акцентные цвета */
-  --amber: #F59E0B; /* Янтарный/желтый - для выделения */
-  --emerald: #10B981; /* Изумрудный - для статусов */
-  --light-scarlet: #EF4444; /* Светло-алый - для ховера */
 }
 
 body {
@@ -60,6 +46,8 @@ a {
 :root {
   --primary-color: #185ee0;
   --secondary-color: #e6eef9a1;
+  --dark: #1F2937;
+  --white: #FFFFFF;
 }
 
 .container {
@@ -475,6 +463,7 @@ main {
   margin-left: 0;
   padding-left: 50px;
   transition: transform 0.5s ease-in-out;
+  animation: menuIn 3s;
   text-align: center;
   overflow-y: auto;
 }
@@ -503,6 +492,204 @@ main {
 
 .nav-container input[type=checkbox]:checked ~ .logo {
   display: none;
+}
+
+.cart-count {
+  position: absolute;
+  top: 25px;
+  right: 100px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.cart-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  justify-content: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  display: flex;
+  animation: menuIn 3s;
+}
+.cart-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cart-content {
+  background-color: white;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+.cart-modal.active .cart-content {
+  transform: translateX(0);
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+.cart-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.cart-header .close-cart {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #666;
+}
+.cart-header .close-cart:hover {
+  color: #000;
+}
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+}
+.cart-item .cart-item-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+.cart-item .cart-item-details {
+  flex: 1;
+}
+.cart-item .cart-item-details h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+.cart-item .cart-item-details .cart-item-price {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.cart-item .cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cart-item .cart-item-controls .quantity-btn {
+  background: none;
+  border: 1px solid #ddd;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart-item .cart-item-controls .quantity-btn:hover {
+  background-color: #eee;
+}
+.cart-item .cart-item-controls .quantity-display {
+  min-width: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+.cart-item .cart-item-controls .remove-btn {
+  background: none;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  padding: 0.25rem;
+  margin-left: 0.5rem;
+}
+.cart-item .cart-item-controls .remove-btn:hover {
+  color: #cc0000;
+}
+
+.empty-cart-message {
+  text-align: center;
+  color: #666;
+  padding: 2rem;
+  font-style: italic;
+}
+
+.cart-footer {
+  padding: 1.5rem;
+  border-top: 1px solid #eee;
+}
+.cart-footer .cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.cart-footer .cart-total span {
+  color: var(--primary-color);
+}
+.cart-footer .order-button {
+  width: 100%;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cart-notification {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  transform: translateX(150%);
+  transition: transform 0.3s ease;
+  animation: menuIn 3s;
+}
+.cart-notification.show {
+  transform: translateX(0);
 }
 
 @media (max-width: 1023px) {
@@ -536,6 +723,10 @@ main {
   .product-card:hover {
     transform: none;
   }
+  .cart-count {
+    top: 0;
+    right: 75px;
+  }
 }
 @media (max-width: 639px) {
   .product-grid {
@@ -565,6 +756,7 @@ main {
   opacity: 0;
   transform: translateY(10px);
   animation: fadeIn 1s ease forwards;
+  animation-delay: 1s;
   animation-fill-mode: both;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -636,7 +828,15 @@ main {
   to {
     opacity: 1;
   }
-}`, "",{"version":3,"sources":["webpack://./src/style.scss"],"names":[],"mappings":"AAAA,gBAAgB;AAEhB;EACI,SAAA;EACA,UAAA;AACJ;;AAEA;EACI,mBAAA;EACA,kBAAA,EAAA,mCAAA;EACA,eAAA,EAAA,+BAAA;EACA,gBAAA,EAAA,qBAAA;EACA,qBAAA,EAAA,8BAAA;EACA,oBAAA,EAAA,qCAAA;EAEA,oBAAA;EACA,gBAAA,EAAA,oCAAA;EACA,kBAAA,EAAA,8BAAA;EACA,wBAAA,EAAA,6BAAA;AAAJ;;AAGA;EACI,gBAAA;EACA,eAAA;EACA,WAAA;EACA,gBAAA;EACA,kBAAA;EACA,gCAAA;EACH,aAAA;EACG,sBAAA;EACA,iBAAA;AAAJ;;AAGA;EACI,qBAAA;AAAJ;;AAGA;EACC,wBAAA;EACA,4BAAA;AAAD;;AAGA;EACE,aAAA;EACA,WAAA;EACA,OAAA;EACA,aAAA;EACA,WAAA;AAAF;;AAGA;EACE,aAAA;EACA,mCAAA;AAAF;;AAEA;EACE,gBAAA;EACA,MAAA;EACA,aAAA;EACA,aAAA;EACA,WAAA;EACA,sBAAA;EACA,sBAAA;EACA,kBAAA;AACF;AAAC;EACC,UAAA;AAEF;;AAEA;EACC,aAAA;AACD;;AAEA;EACC,aAAA;EACA,mBAAA;EACA,2BAAA;EACG,iBAAA;EACH,YAAA;EACA,YAAA;EACA,kBAAA;EACA,gBAAA;EACA,mBAAA;EACA,eAAA;EACA,+BAAA;AACD;;AAEA;EACC,aAAA;EACA,mBAAA;EACA,uBAAA;EACG,gBAAA;EACH,aAAA;EACA,YAAA;EACA,qBAAA;EACA,kBAAA;EACA,yBAAA;AACD;;AAIE;EACC,2BAAA;AADH;AAEG;EACC,sCAAA;EACA,WAAA;AAAJ;;AAQE;EACC,wBAAA;AALH;;AAYE;EACC,2BAAA;AATH;;AAgBE;EACC,2BAAA;AAbH;;AAoBE;EACC,2BAAA;AAjBH;;AAuBE;EACC,2BAAA;AApBH;;AAyBA;EACC,kBAAA;EACA,aAAA;EACA,YAAA;EACA,YAAA;EACA,wCAAA;EACA,UAAA;EACA,mBAAA;EACA,0BAAA;AAtBD;;AAyBA;EACE,kBAAA;EACA,aAAA;EACA,sBAAA;EACA,SAAA;AAtBF;AAwBE;EACE,aAAA;AAtBJ;AAyBE;EACE,aAAA;EACA,mBAAA;EACA,YAAA;EACA,WAAA;EACA,kBAAA;EACA,gBAAA;EACA,mBAAA;EACA,eAAA;EACA,+BAAA;EACA,eAAA;AAvBJ;AA0BE;EACE,aAAA;EACA,mBAAA;EACA,uBAAA;EACH,gBAAA;EACG,aAAA;EACA,YAAA;EACA,qBAAA;EACA,kBAAA;EACA,yBAAA;AAxBJ;AA6BM;EACE,2BAAA;AA3BR;AA4BQ;EACE,sCAAA;EACA,WAAA;AA1BV;AAkCM;EACE,wBAAA;AAhCR;AAuCM;EACE,2BAAA;AArCR;AA4CM;EACE,2BAAA;AA1CR;AAiDM;EACE,2BAAA;AA/CR;AAsDM;EACE,2BAAA;AApDR;AAyDE;EACE,kBAAA;EACA,YAAA;EACA,UAAA;EACA,wCAAA;EACA,UAAA;EACA,mBAAA;EACA,0BAAA;AAvDJ;;AA2DA;EACC,aAAA;EACA,8BAAA;EACA,SAAA;EACA,mBAAA;EACA,mBAAA;AAxDD;;AA2DA;EACC,UAAA;AAxDD;;AA2DA;EACC,aAAA;EACA,mBAAA;EACA,SAAA;AAxDD;;AA2DA;EACC,eAAA;EACA,YAAA;EACA,wBAAA;EACA,YAAA;EACA,mBAAA;EACA,gBAAA;AAxDD;;AA2DA;EACC,kCAAA;EACA,2BAAA;AAxDD;;AA2DA;EACI,WAAA;EACA,sBAAA;EACA,kBAAA;EACA,aAAA;EACA,aAAA;EACA,YAAA;EACA,sBAAA;EACA,gBAAA;AAxDJ;;AA2DA;EACI,wBAAA;EACA,gCAAA;AAxDJ;;AA4DA;EACC,aAAA;AAzDD;;AA4DA;EACC,yCAAA;AAzDD;;AA4DA;EACC,oBAAA;EACA,WAAA;AAzDD;;AA4DA;EACC,aAAA;EACA,2DAAA;EACA,WAAA;EACA,mBAAA;AAzDD;;AA4DA;EACC,8BAAA;EACA,kBAAA;EACA,eAAA;EACA,yCAAA;EACA,2CAAA;EACA,eAAA;EACA,gCAAA;EACA,aAAA;EACA,sBAAA;EACA,6BAAA;AAzDD;;AA4DA;EACC,sCAAA;EACA,qDAAA;AAzDD;;AA4DA;EACC,WAAA;EACA,aAAA;EACA,gBAAA;EACA,kBAAA;EACA,mBAAA;AAzDD;;AA4DA;EACC,WAAA;EACA,YAAA;EACA,iBAAA;AAzDD;;AA4DA;EACC,qBAAA;EACA,kBAAA;EACA,gBAAA;EACA,kBAAA;EACA,gBAAA;EACA,uBAAA;EACA,oBAAA;EACA,4BAAA;EACA,qBAAA;EACA,aAAA;AAzDD;;AA4DA;EACC,uBAAA;EACA,mBAAA;EACA,gBAAA;EACA,uBAAA;EACA,oBAAA;EACA,4BAAA;EACA,qBAAA;EACA,aAAA;AAzDD;;AA4DA;EACC,iBAAA;EACA,gBAAA;EACA,2BAAA;EACA,mBAAA;AAzDD;;AA4DA;EACC,sCAAA;EACA,mBAAA;EACA,YAAA;EACA,uBAAA;EACA,kBAAA;EACA,eAAA;EACA,gBAAA;EACA,eAAA;EACA,iCAAA;AAzDD;;AA4DA;EACC,wCAAA;EACA,2BAAA;AAzDD;;AA4DA;EACC,aAAA;EACA,kBAAA;EACA,sCAAA;EACA,UAAA;AAzDD;;AA4DA;EACE,WAAA;AAzDF;;AA4DA;EACE,aAAA;EACA,8BAAA;EACA,mBAAA;EACA,YAAA;AAzDF;;AA4DA;EACE,aAAA;AAzDF;;AA4DA;EACE,gBAAA;AAzDF;;AA4DA;EACE,qBAAA;EACA,cAAA;EACA,gBAAA;EACA,iBAAA;EACA,eAAA;AAzDF;;AA4DA;EACI,mBAAA;AAzDJ;;AA4DA;EACE,cAAA;EACA,kBAAA;EACA,YAAA;AAzDF;;AA4DA;EACE,kBAAA;EACA,cAAA;EACA,YAAA;EACA,WAAA;EACA,SAAA;EACA,UAAA;EACA,UAAA;EACA,UAAA;EACA,eAAA;AAzDF;;AA4DA;EACE,cAAA;EACA,YAAA;EACA,WAAA;EACA,kBAAA;EACA,SAAA;EACA,UAAA;EACA,UAAA;EACA,aAAA;EACA,sBAAA;EACA,8BAAA;AAzDF;;AA4DA;EACE,cAAA;EACA,WAAA;EACA,WAAA;EACA,mBAAA;EACA,mBAAA;AAzDF;;AA4DA;EACE,uBAAA;EACA,sCAAA;AAzDF;;AA4DA;EACE,sCAAA;AAzDF;;AA4DA;EACE,yBAAA;EACA,sCAAA;AAzDF;;AA4DA;EACE,eAAA;EACA,MAAA;EACA,OAAA;EACA,kBAAA;EACA,wBAAA;EACA,0CAAA;EACA,aAAA;EACA,4BAAA;EACA,aAAA;EACA,sBAAA;EACA,cAAA;EACA,kBAAA;EACA,sCAAA;EACA,kBAAA;EACA,gBAAA;AAzDF;;AA4DA;EACE,qBAAA;EACA,iBAAA;EACA,gBAAA;AAzDF;;AA4DA;EACE,wBAAA;AAzDF;;AA4DA;EACE,wBAAA;AAzDF;;AA4DA;EACE,oBAAA;AAzDF;;AA4DA;EACE,yBAAA;AAzDF;;AA4DA;EACE,aAAA;AAzDF;;AA4DA;EACI;IACF,aAAA;EAzDA;EA2DD;IACC,cAAA;EAzDA;EA4DD;IACC,eAAA;IACA,UAAA;IACA,wBAAA;IACA,UAAA;EA1DA;EA6DD;IACC,iBAAA;EA3DA;EA8DD;IACC,iBAAA;IACA,2DAAA;EA5DA;EA+DD;IACC,WAAA;EA7DA;EA+DD;IACC,wBAAA;IACA,yCAAA;IACA,aAAA;EA7DA;EA+DD;IACC,eAAA;EA7DA;AACF;AAgEA;EACC;IACC,2DAAA;EA9DA;EAgED;IACC,WAAA;IACE,SAAA;IACA,MAAA;EA9DF;EAgED;IACC,WAAA;EA9DA;EAiED;IACC,gBAAA;EA/DA;EAkED;IACC,gBAAA;IACA,aAAA;IACA,WAAA;EAhEA;EAmEA;IACE,iBAAA;EAjEF;AACF;AAsEE;EACE,UAAA;EACA,2BAAA;EACA,kCAAA;EACA,yBAAA;EACA,qDAAA;AApEJ;AAuEM;EACE,qBAAA;AArER;AAoEM;EACE,qBAAA;AAlER;AAiEM;EACE,qBAAA;AA/DR;AA8DM;EACE,qBAAA;AA5DR;AA2DM;EACE,qBAAA;AAzDR;AAwDM;EACE,qBAAA;AAtDR;AAqDM;EACE,qBAAA;AAnDR;AAkDM;EACE,qBAAA;AAhDR;AA+CM;EACE,qBAAA;AA7CR;AA4CM;EACE,mBAAA;AA1CR;AAyCM;EACE,qBAAA;AAvCR;AAsCM;EACE,qBAAA;AApCR;AAmCM;EACE,qBAAA;AAjCR;AAgCM;EACE,qBAAA;AA9BR;AA6BM;EACE,qBAAA;AA3BR;AA0BM;EACE,qBAAA;AAxBR;AAuBM;EACE,qBAAA;AArBR;AAoBM;EACE,qBAAA;AAlBR;AAiBM;EACE,qBAAA;AAfR;AAcM;EACE,mBAAA;AAZR;;AAkBA;EACE;IACE,UAAA;EAfF;EAiBA;IACE,UAAA;EAfF;AACF","sourcesContent":["@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap\");\r\n\r\n*{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n:root {\r\n    /* Основные цвета */\r\n    --scarlet: #DC2626;        /* Алый - для акцентов и действий */\r\n    --dark: #1F2937;           /* Темный - для текста и фона */\r\n    --white: #FFFFFF;          /* Белый - для фона */\r\n    --light-gray: #F9FAFB;     /* Светло-серый - для секций */\r\n    --text-gray: #6B7280;      /* Серый для второстепенного текста */\r\n    \r\n    /* Акцентные цвета */\r\n    --amber: #F59E0B;          /* Янтарный/желтый - для выделения */\r\n    --emerald: #10B981;        /* Изумрудный - для статусов */\r\n    --light-scarlet: #EF4444;  /* Светло-алый - для ховера */\r\n}\r\n\r\nbody{\r\n    font-weight: 400;\r\n    font-size: 16px;\r\n    color: #000;\r\n    background: #fff;\r\n    overflow-x: hidden;\r\n    font-family: 'Inter', sans-serif;\r\n\tdisplay: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}\r\n\r\na{\r\n    text-decoration: none;\r\n}\r\n\r\n:root {\r\n\t--primary-color: #185ee0;\r\n\t--secondary-color: #e6eef9a1;\r\n}\r\n\r\n.container{\r\n  display: flex;\r\n  width: 100%;\r\n  flex: 1;\r\n  display: flex;\r\n  width: 100%;\r\n}\r\n\r\n.container-header {\r\n  display: flex;\r\n  box-shadow: 1px 0 0 rgb(70, 69, 69);\r\n}\r\n.tabs {\r\n  position: sticky;\r\n  top: 0;\r\n  height: 340px;\r\n  display: flex;\r\n  width: 100%;\r\n  flex-direction: column;\r\n  background-color: #fff;\r\n  padding: 2rem 1rem;\r\n\t* {\r\n\t\tz-index: 2;\r\n\t}\r\n}\r\n\r\ninput[type=\"radio\"] {\r\n\tdisplay: none;\r\n}\r\n\r\n.tab {\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tjustify-content: flex-start;\r\n    margin-left: 16px;\r\n\theight: 54px;\r\n\twidth: 200px;\r\n\tfont-size: 1.25rem;\r\n\tfont-weight: 500;\r\n\tborder-radius: 99px;\r\n\tcursor: pointer;\r\n\ttransition: color 0.15s ease-in;\r\n}\r\n\r\n.notification {\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tjustify-content: center;\r\n    padding: 2px 5px;\r\n\twidth: 1.5rem;\r\n\theight: 2rem;\r\n\tmargin-right: 0.75rem;\r\n\tborder-radius: 50%;\r\n\ttransition: 0.15s ease-in;\r\n}\r\n\r\ninput[type=\"radio\"] {\r\n\t&:checked {\r\n\t\t& + label {\r\n\t\t\tcolor: var(--primary-color);\r\n\t\t\t& > .notification {\r\n\t\t\t\tbackground-color: var(--primary-color);\r\n\t\t\t\tcolor: #fff;\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}\r\n\r\ninput[id=\"radio-1\"] {\r\n\t&:checked {\r\n\t\t& ~ .glider {\r\n\t\t\ttransform: translateY(0);\r\n\t\t}\r\n\t}\r\n}\r\n\r\ninput[id=\"radio-2\"] {\r\n\t&:checked {\r\n\t\t& ~ .glider {\r\n\t\t\ttransform: translateY(100%);\r\n\t\t}\r\n\t}\r\n}\r\n\r\ninput[id=\"radio-3\"] {\r\n\t&:checked {\r\n\t\t& ~ .glider {\r\n\t\t\ttransform: translateY(200%);\r\n\t\t}\r\n\t}\r\n}\r\n\r\ninput[id=\"radio-4\"] {\r\n\t&:checked {\r\n\t\t& ~ .glider {\r\n\t\t\ttransform: translateY(300%);\r\n\t\t}\r\n\t}\r\n}\r\ninput[id=\"radio-5\"] {\r\n\t&:checked {\r\n\t\t& ~ .glider {\r\n\t\t\ttransform: translateY(400%);\r\n\t\t}\r\n\t}\r\n}\r\n\r\n.glider {\r\n\tposition: absolute;\r\n\tdisplay: flex;\r\n\theight: 54px;\r\n\twidth: 200px;\r\n\tbackground-color: var(--secondary-color);\r\n\tz-index: 1;\r\n\tborder-radius: 99px; \r\n\ttransition: 0.25s ease-out;\r\n}\r\n\r\n.menu-items {\r\n  position: relative;\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 10px;\r\n  \r\n  input[type=\"radio\"] {\r\n    display: none;\r\n  }\r\n\r\n  .mobile-tab {\r\n    display: flex;\r\n    align-items: center;\r\n    height: 54px;\r\n    width: 100%;\r\n    font-size: 1.25rem;\r\n    font-weight: 500;\r\n    border-radius: 99px;\r\n    cursor: pointer;\r\n    transition: color 0.15s ease-in;\r\n    padding: 0 1rem;\r\n  }\r\n\r\n  .mobile-notification {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n\tpadding: 2px 5px;\r\n    width: 1.5rem;\r\n    height: 2rem;\r\n    margin-right: 0.75rem;\r\n    border-radius: 50%;\r\n    transition: 0.15s ease-in;\r\n  }\r\n\r\n  input[type=\"radio\"] {\r\n    &:checked {\r\n      & + label {\r\n        color: var(--primary-color);\r\n        & > .mobile-notification {\r\n          background-color: var(--primary-color);\r\n          color: #fff;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  input[id=\"mobile-radio-1\"] {\r\n    &:checked {\r\n      & ~ .mobile-glider {\r\n        transform: translateY(0);\r\n      }\r\n    }\r\n  }\r\n\r\n  input[id=\"mobile-radio-2\"] {\r\n    &:checked {\r\n      & ~ .mobile-glider {\r\n        transform: translateY(100%);\r\n      }\r\n    }\r\n  }\r\n\r\n  input[id=\"mobile-radio-3\"] {\r\n    &:checked {\r\n      & ~ .mobile-glider {\r\n        transform: translateY(200%);\r\n      }\r\n    }\r\n  }\r\n\r\n  input[id=\"mobile-radio-4\"] {\r\n    &:checked {\r\n      & ~ .mobile-glider {\r\n        transform: translateY(300%);\r\n      }\r\n    }\r\n  }\r\n\r\n  input[id=\"mobile-radio-5\"] {\r\n    &:checked {\r\n      & ~ .mobile-glider {\r\n        transform: translateY(400%);\r\n      }\r\n    }\r\n  }\r\n\r\n  .mobile-glider {\r\n    position: absolute;\r\n    height: 54px;\r\n    width: 80%;\r\n    background-color: var(--secondary-color);\r\n    z-index: 1;\r\n    border-radius: 99px;\r\n    transition: 0.25s ease-out;\r\n  }\r\n}\r\n\r\n.contact{\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\tgap: 64px;\r\n\tmargin-bottom: 32px;\r\n\talign-items: center;\r\n}\r\n\r\n.input-search{\r\n\twidth: 78%;\r\n}\r\n\r\n.icons{\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tgap: 32px;\r\n}\r\n\r\n.icon a i{\r\n\tfont-size: 32px;\r\n\tcolor: black;\r\n\tbackground: var(--white);\r\n\tpadding: 8px;\r\n\tborder-radius: 60px;\r\n\ttransition:.3s;\r\n}\r\n\r\n.icon a i:hover{\r\n\tbackground: var(--secondary-color);\r\n\tcolor: var(--primary-color);\r\n}\r\n\r\n.input-search input[type=text]{\r\n    width:100%;\r\n    border:2px solid #aaa;\r\n    border-radius:4px;\r\n    margin:8px 0;\r\n    outline:none;\r\n    padding:8px;\r\n    box-sizing:border-box;\r\n    transition:.3s;\r\n  }\r\n  \r\n.input-search input[type=text]:focus{\r\n    border-color:dodgerBlue;\r\n    box-shadow:0 0 8px 0 dodgerBlue;\r\n  }\r\n  \r\n\r\n.menu{\r\n\tdisplay: none;\r\n}\r\n\r\n.bg-header{\r\n\tbox-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\nmain{\r\n\tpadding: 2rem 1.5rem;\r\n\twidth: 100%;\r\n}\r\n\r\n.product-grid {\r\n\tdisplay: grid;\r\n\tgrid-template-columns: repeat(auto-fit, minmax(280px, 1fr));\r\n\tgap: 1.5rem;\r\n\tmargin-bottom: 8rem;\r\n}\r\n\r\n.product-card {\r\n\tbackground-color: var(--white);\r\n\tborder-radius: 8px;\r\n\tpadding: 1.5rem;\r\n\tbox-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);\r\n\ttransition: transform 0.3s, box-shadow 0.3s;\r\n\tcursor: pointer;\r\n\tborder-top: 4px solid dodgerBlue;\r\n\tdisplay: flex;\r\n\tflex-direction: column;\r\n\tjustify-content: space-around;\r\n}\r\n\r\n.product-card:hover {\r\n\ttransform: translateY(-5px) !important;\r\n\tbox-shadow: 0 10px 15px rgba(0, 0, 0, 0.1) !important;\r\n}\r\n\r\n.product-image {\r\n\twidth: 100%;\r\n\theight: 200px;\r\n\toverflow: hidden;\r\n\tborder-radius: 6px;\r\n\tmargin-bottom: 1rem;\r\n}\r\n\r\n.product-image img {\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tobject-fit: cover;\r\n}\r\n\r\n.product-card h3 {\r\n\tmargin-bottom: 0.5rem;\r\n\tfont-size: 1.25rem;\r\n\tfont-weight: 600;\r\n\tcolor: var(--dark);\r\n\toverflow: hidden;\r\n\ttext-overflow: ellipsis;\r\n\tdisplay: -webkit-box;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-line-clamp: 2;\r\n\tline-clamp: 2;\r\n}\r\n\r\n.product-description {\r\n\tcolor: var(--text-gray);\r\n\tmargin-bottom: 1rem;\r\n\toverflow: hidden;\r\n\ttext-overflow: ellipsis;\r\n\tdisplay: -webkit-box;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-line-clamp: 2;\r\n\tline-clamp: 2;\r\n}\r\n\r\n.product-price {\r\n\tfont-size: 1.5rem;\r\n\tfont-weight: 600;\r\n\tcolor: var(--primary-color);\r\n\tmargin-bottom: 1rem;\r\n}\r\n\r\n.buy-button {\r\n\tbackground-color: var(--primary-color);\r\n\tcolor: var(--white);\r\n\tborder: none;\r\n\tpadding: 0.75rem 1.5rem;\r\n\tborder-radius: 6px;\r\n\tfont-size: 1rem;\r\n\tfont-weight: 500;\r\n\tcursor: pointer;\r\n\ttransition: background-color 0.3s;\r\n}\r\n\r\n.buy-button:hover {\r\n\tbackground-color: var(--secondary-color);\r\n\tcolor: var(--primary-color);\r\n}\r\n\r\n.footer {\r\n\tpadding: 2rem;\r\n\tcolor: var(--dark);\r\n\tbox-shadow: 0 -1px 0 0 rgb(70, 69, 69);\r\n\tz-index: 2;\r\n}\r\n\r\n.navbar {\r\n  width: 100%;\r\n}\r\n\r\n.nav-container {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  height: 62px;\r\n}\r\n\r\n.navbar .menu-items {\r\n  display: flex;\r\n}\r\n\r\n.navbar .nav-container li {\r\n  list-style: none;\r\n}\r\n\r\n.navbar .nav-container a {\r\n  text-decoration: none;\r\n  color: #0e2431;\r\n  font-weight: 500;\r\n  font-size: 1.2rem;\r\n  padding: 0.7rem;\r\n}\r\n\r\n.navbar .nav-container a:hover{\r\n    font-weight: bolder;\r\n}\r\n\r\n.nav-container {\r\n  display: block;\r\n  position: relative;\r\n  height: 60px;\r\n}\r\n\r\n.nav-container .checkbox {\r\n  position: absolute;\r\n  display: block;\r\n  height: 32px;\r\n  width: 32px;\r\n  top: 20px;\r\n  left: 20px;\r\n  z-index: 5;\r\n  opacity: 0;\r\n  cursor: pointer;\r\n}\r\n\r\n.nav-container .hamburger-lines {\r\n  display: block;\r\n  height: 26px;\r\n  width: 32px;\r\n  position: absolute;\r\n  top: 17px;\r\n  left: 20px;\r\n  z-index: 2;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-between;\r\n}\r\n\r\n.nav-container .hamburger-lines .line {\r\n  display: block;\r\n  height: 4px;\r\n  width: 100%;\r\n  border-radius: 10px;\r\n  background: #0e2431;\r\n}\r\n\r\n.nav-container .hamburger-lines .line1 {\r\n  transform-origin: 0% 0%;\r\n  transition: transform 0.4s ease-in-out;\r\n}\r\n\r\n.nav-container .hamburger-lines .line2 {\r\n  transition: transform 0.2s ease-in-out;\r\n}\r\n\r\n.nav-container .hamburger-lines .line3 {\r\n  transform-origin: 0% 100%;\r\n  transition: transform 0.4s ease-in-out;\r\n}\r\n\r\n.navbar .menu-items {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  padding-top: 120px;\r\n  background: var(--white);\r\n  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);\r\n  height: 100vh;\r\n  transform: translateX(-100%);\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin-left: 0;\r\n  padding-left: 50px;\r\n  transition: transform 0.5s ease-in-out;\r\n  text-align: center;\r\n  overflow-y: auto;\r\n}\r\n\r\n.navbar .menu-items li {\r\n  margin-bottom: 1.2rem;\r\n  font-size: 1.5rem;\r\n  font-weight: 500;\r\n}\r\n\r\n.nav-container input[type=\"checkbox\"]:checked ~ .menu-items {\r\n  transform: translateX(0);\r\n}\r\n\r\n.nav-container input[type=\"checkbox\"]:checked ~ .hamburger-lines .line1 {\r\n  transform: rotate(45deg);\r\n}\r\n\r\n.nav-container input[type=\"checkbox\"]:checked ~ .hamburger-lines .line2 {\r\n  transform: scaleY(0);\r\n}\r\n\r\n.nav-container input[type=\"checkbox\"]:checked ~ .hamburger-lines .line3 {\r\n  transform: rotate(-45deg);\r\n}\r\n\r\n.nav-container input[type=\"checkbox\"]:checked ~ .logo{\r\n  display: none;\r\n}\r\n\r\n@media (max-width: 1023px){\r\n    .container-header{\r\n\t\tdisplay: none;\r\n\t}\r\n\t.menu{\r\n\t\tdisplay: block;\r\n\t}\r\n\r\n\t.contact{\r\n\t\tposition: fixed;\r\n\t\twidth: min(100%, 95%);\r\n\t\tbackground: var(--white);\r\n\t\tz-index: 3;\r\n\t}\r\n\r\n\tmain{\r\n\t\tpadding: 0 1.5rem;\r\n\t}\r\n\r\n\t.product-grid{\r\n\t\tpadding-top: 5rem;\r\n\t\tgrid-template-columns: repeat(auto-fit, minmax(180px, 1fr));\r\n\t}\r\n\r\n\t.tabs{\r\n\t\twidth: auto;\r\n\t}\r\n\t.nav-container{\r\n\t\tbackground: var(--white);\r\n\t\tbox-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);\r\n\t\tz-index: 1001;\r\n\t}\r\n\t.product-card:hover {\r\n\t\ttransform: none;\r\n\t}\r\n}\r\n\r\n@media (max-width: 639px){\r\n\t.product-grid{\r\n\t\tgrid-template-columns: repeat(auto-fit, minmax(185px, 1fr));\r\n\t}\r\n\t.contact{\r\n\t\twidth: 100%;\r\n    left: 0px;\r\n    gap: 0;\r\n\t}\r\n\t.navbar .menu-items{\r\n\t\twidth: 100%;\t\r\n\t}\r\n\t\r\n\t.nav-container input[type=\"checkbox\"]:checked ~ .menu-items {\r\n\t\toverflow: hidden;\r\n\t}\r\n\t\r\n\tbody.menu-open {\r\n\t\toverflow: hidden; \r\n\t\theight: 100vh; \r\n\t\twidth: 100%; \r\n\t}\r\n\r\n  .input-search{\r\n    margin-left: 64px;\r\n  }\r\n}\r\n\r\n// Анимация появления карточек товара\r\n.product-grid {\r\n  .product-card {\r\n    opacity: 0;\r\n    transform: translateY(10px);\r\n    animation: fadeIn 1s ease forwards;\r\n    animation-fill-mode: both;\r\n    transition: transform 0.3s ease, box-shadow 0.3s ease;\r\n\r\n    @for $i from 1 through 20 {\r\n      &:nth-child(#{$i}) {\r\n        animation-delay: #{$i * 0.1}s;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n@keyframes fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
+}
+@keyframes menuIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}`, "",{"version":3,"sources":["webpack://./src/style.scss"],"names":[],"mappings":"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","sourcesContent":["@import url(\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap\");\r\n\r\n*{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\nbody{\r\n  font-weight: 400;\r\n  font-size: 16px;\r\n  color: #000;\r\n  background: #fff;\r\n  overflow-x: hidden;\r\n  font-family: 'Inter', sans-serif;\r\n  display: flex;\r\n  flex-direction: column;\r\n  min-height: 100vh;\r\n}\r\n\r\na{\r\n  text-decoration: none;\r\n}\r\n\r\n:root {\r\n\t--primary-color: #185ee0;\r\n\t--secondary-color: #e6eef9a1;\r\n  --dark: #1F2937;   \r\n  --white: #FFFFFF;         \r\n}\r\n\r\n.container{\r\n  display: flex;\r\n  width: 100%;\r\n  flex: 1;\r\n  display: flex;\r\n  width: 100%;\r\n}\r\n\r\n.container-header {\r\n  display: flex;\r\n  box-shadow: 1px 0 0 rgb(70, 69, 69);\r\n}\r\n.tabs {\r\n  position: sticky;\r\n  top: 0;\r\n  height: 340px;\r\n  display: flex;\r\n  width: 100%;\r\n  flex-direction: column;\r\n  background-color: #fff;\r\n  padding: 2rem 1rem;\r\n\t* {\r\n\t\tz-index: 2;\r\n\t}\r\n}\r\n\r\ninput[type=\"radio\"] {\r\n\tdisplay: none;\r\n}\r\n\r\n.tab {\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tjustify-content: flex-start;\r\n    margin-left: 16px;\r\n\theight: 54px;\r\n\twidth: 200px;\r\n\tfont-size: 1.25rem;\r\n\tfont-weight: 500;\r\n\tborder-radius: 99px;\r\n\tcursor: pointer;\r\n\ttransition: color 0.15s ease-in;\r\n}\r\n\r\n.notification {\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tjustify-content: center;\r\n    padding: 2px 5px;\r\n\twidth: 1.5rem;\r\n\theight: 2rem;\r\n\tmargin-right: 0.75rem;\r\n\tborder-radius: 50%;\r\n\ttransition: 0.15s ease-in;\r\n}\r\n\r\ninput[type=\"radio\"] {\r\n\t&:checked {\r\n\t\t& + label {\r\n\t\t\tcolor: var(--primary-color);\r\n\t\t\t& > .notification {\r\n\t\t\t\tbackground-color: var(--primary-color);\r\n\t\t\t\tcolor: #fff;\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}\r\n\r\ninput[id=\"radio-1\"] {\r\n\t&:checked {\r\n\t\t& ~ .glider {\r\n\t\t\ttransform: translateY(0);\r\n\t\t}\r\n\t}\r\n}\r\n\r\ninput[id=\"radio-2\"] {\r\n\t&:checked {\r\n\t\t& ~ .glider {\r\n\t\t\ttransform: translateY(100%);\r\n\t\t}\r\n\t}\r\n}\r\n\r\ninput[id=\"radio-3\"] {\r\n\t&:checked {\r\n\t\t& ~ .glider {\r\n\t\t\ttransform: translateY(200%);\r\n\t\t}\r\n\t}\r\n}\r\n\r\ninput[id=\"radio-4\"] {\r\n\t&:checked {\r\n\t\t& ~ .glider {\r\n\t\t\ttransform: translateY(300%);\r\n\t\t}\r\n\t}\r\n}\r\ninput[id=\"radio-5\"] {\r\n\t&:checked {\r\n\t\t& ~ .glider {\r\n\t\t\ttransform: translateY(400%);\r\n\t\t}\r\n\t}\r\n}\r\n\r\n.glider {\r\n\tposition: absolute;\r\n\tdisplay: flex;\r\n\theight: 54px;\r\n\twidth: 200px;\r\n\tbackground-color: var(--secondary-color);\r\n\tz-index: 1;\r\n\tborder-radius: 99px; \r\n\ttransition: 0.25s ease-out;\r\n}\r\n\r\n.menu-items {\r\n  position: relative;\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 10px;\r\n  \r\n  input[type=\"radio\"] {\r\n    display: none;\r\n  }\r\n\r\n  .mobile-tab {\r\n    display: flex;\r\n    align-items: center;\r\n    height: 54px;\r\n    width: 100%;\r\n    font-size: 1.25rem;\r\n    font-weight: 500;\r\n    border-radius: 99px;\r\n    cursor: pointer;\r\n    transition: color 0.15s ease-in;\r\n    padding: 0 1rem;\r\n  }\r\n\r\n  .mobile-notification {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n\t  padding: 2px 5px;\r\n    width: 1.5rem;\r\n    height: 2rem;\r\n    margin-right: 0.75rem;\r\n    border-radius: 50%;\r\n    transition: 0.15s ease-in;\r\n  }\r\n\r\n  input[type=\"radio\"] {\r\n    &:checked {\r\n      & + label {\r\n        color: var(--primary-color);\r\n        & > .mobile-notification {\r\n          background-color: var(--primary-color);\r\n          color: #fff;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  input[id=\"mobile-radio-1\"] {\r\n    &:checked {\r\n      & ~ .mobile-glider {\r\n        transform: translateY(0);\r\n      }\r\n    }\r\n  }\r\n\r\n  input[id=\"mobile-radio-2\"] {\r\n    &:checked {\r\n      & ~ .mobile-glider {\r\n        transform: translateY(100%);\r\n      }\r\n    }\r\n  }\r\n\r\n  input[id=\"mobile-radio-3\"] {\r\n    &:checked {\r\n      & ~ .mobile-glider {\r\n        transform: translateY(200%);\r\n      }\r\n    }\r\n  }\r\n\r\n  input[id=\"mobile-radio-4\"] {\r\n    &:checked {\r\n      & ~ .mobile-glider {\r\n        transform: translateY(300%);\r\n      }\r\n    }\r\n  }\r\n\r\n  input[id=\"mobile-radio-5\"] {\r\n    &:checked {\r\n      & ~ .mobile-glider {\r\n        transform: translateY(400%);\r\n      }\r\n    }\r\n  }\r\n\r\n  .mobile-glider {\r\n    position: absolute;\r\n    height: 54px;\r\n    width: 80%;\r\n    background-color: var(--secondary-color);\r\n    z-index: 1;\r\n    border-radius: 99px;\r\n    transition: 0.25s ease-out;\r\n  }\r\n}\r\n\r\n.contact{\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\tgap: 64px;\r\n\tmargin-bottom: 32px;\r\n\talign-items: center;\r\n}\r\n\r\n.input-search{\r\n\twidth: 78%;\r\n}\r\n\r\n.icons{\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tgap: 32px;\r\n}\r\n\r\n.icon a i{\r\n\tfont-size: 32px;\r\n\tcolor: black;\r\n\tbackground: var(--white);\r\n\tpadding: 8px;\r\n\tborder-radius: 60px;\r\n\ttransition:.3s;\r\n}\r\n\r\n.icon a i:hover{\r\n\tbackground: var(--secondary-color);\r\n\tcolor: var(--primary-color);\r\n}\r\n\r\n.input-search input[type=text]{\r\n    width:100%;\r\n    border:2px solid #aaa;\r\n    border-radius:4px;\r\n    margin:8px 0;\r\n    outline:none;\r\n    padding:8px;\r\n    box-sizing:border-box;\r\n    transition:.3s;\r\n  }\r\n  \r\n.input-search input[type=text]:focus{\r\n    border-color:dodgerBlue;\r\n    box-shadow:0 0 8px 0 dodgerBlue;\r\n  }\r\n  \r\n\r\n.menu{\r\n\tdisplay: none;\r\n}\r\n\r\n.bg-header{\r\n\tbox-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\nmain{\r\n\tpadding: 2rem 1.5rem;\r\n\twidth: 100%;\r\n}\r\n\r\n.product-grid {\r\n\tdisplay: grid;\r\n\tgrid-template-columns: repeat(auto-fit, minmax(280px, 1fr));\r\n\tgap: 1.5rem;\r\n\tmargin-bottom: 8rem;\r\n}\r\n\r\n.product-card {\r\n\tbackground-color: var(--white);\r\n\tborder-radius: 8px;\r\n\tpadding: 1.5rem;\r\n\tbox-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);\r\n\ttransition: transform 0.3s, box-shadow 0.3s;\r\n\tcursor: pointer;\r\n\tborder-top: 4px solid dodgerBlue;\r\n\tdisplay: flex;\r\n\tflex-direction: column;\r\n\tjustify-content: space-around;\r\n}\r\n\r\n.product-card:hover {\r\n\ttransform: translateY(-5px) !important;\r\n\tbox-shadow: 0 10px 15px rgba(0, 0, 0, 0.1) !important;\r\n}\r\n\r\n.product-image {\r\n\twidth: 100%;\r\n\theight: 200px;\r\n\toverflow: hidden;\r\n\tborder-radius: 6px;\r\n\tmargin-bottom: 1rem;\r\n}\r\n\r\n.product-image img {\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tobject-fit: cover;\r\n}\r\n\r\n.product-card h3 {\r\n\tmargin-bottom: 0.5rem;\r\n\tfont-size: 1.25rem;\r\n\tfont-weight: 600;\r\n\tcolor: var(--dark);\r\n\toverflow: hidden;\r\n\ttext-overflow: ellipsis;\r\n\tdisplay: -webkit-box;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-line-clamp: 2;\r\n\tline-clamp: 2;\r\n}\r\n\r\n.product-description {\r\n\tcolor: var(--text-gray);\r\n\tmargin-bottom: 1rem;\r\n\toverflow: hidden;\r\n\ttext-overflow: ellipsis;\r\n\tdisplay: -webkit-box;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-line-clamp: 2;\r\n\tline-clamp: 2;\r\n}\r\n\r\n.product-price {\r\n\tfont-size: 1.5rem;\r\n\tfont-weight: 600;\r\n\tcolor: var(--primary-color);\r\n\tmargin-bottom: 1rem;\r\n}\r\n\r\n.buy-button {\r\n\tbackground-color: var(--primary-color);\r\n\tcolor: var(--white);\r\n\tborder: none;\r\n\tpadding: 0.75rem 1.5rem;\r\n\tborder-radius: 6px;\r\n\tfont-size: 1rem;\r\n\tfont-weight: 500;\r\n\tcursor: pointer;\r\n\ttransition: background-color 0.3s;\r\n}\r\n\r\n.buy-button:hover {\r\n\tbackground-color: var(--secondary-color);\r\n\tcolor: var(--primary-color);\r\n}\r\n\r\n.footer {\r\n\tpadding: 2rem;\r\n\tcolor: var(--dark);\r\n\tbox-shadow: 0 -1px 0 0 rgb(70, 69, 69);\r\n\tz-index: 2;\r\n}\r\n\r\n.navbar {\r\n  width: 100%;\r\n}\r\n\r\n.nav-container {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  height: 62px;\r\n}\r\n\r\n.navbar .menu-items {\r\n  display: flex;\r\n}\r\n\r\n.navbar .nav-container li {\r\n  list-style: none;\r\n}\r\n\r\n.navbar .nav-container a {\r\n  text-decoration: none;\r\n  color: #0e2431;\r\n  font-weight: 500;\r\n  font-size: 1.2rem;\r\n  padding: 0.7rem;\r\n}\r\n\r\n.navbar .nav-container a:hover{\r\n    font-weight: bolder;\r\n}\r\n\r\n.nav-container {\r\n  display: block;\r\n  position: relative;\r\n  height: 60px;\r\n}\r\n\r\n.nav-container .checkbox {\r\n  position: absolute;\r\n  display: block;\r\n  height: 32px;\r\n  width: 32px;\r\n  top: 20px;\r\n  left: 20px;\r\n  z-index: 5;\r\n  opacity: 0;\r\n  cursor: pointer;\r\n}\r\n\r\n.nav-container .hamburger-lines {\r\n  display: block;\r\n  height: 26px;\r\n  width: 32px;\r\n  position: absolute;\r\n  top: 17px;\r\n  left: 20px;\r\n  z-index: 2;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-between;\r\n}\r\n\r\n.nav-container .hamburger-lines .line {\r\n  display: block;\r\n  height: 4px;\r\n  width: 100%;\r\n  border-radius: 10px;\r\n  background: #0e2431;\r\n}\r\n\r\n.nav-container .hamburger-lines .line1 {\r\n  transform-origin: 0% 0%;\r\n  transition: transform 0.4s ease-in-out;\r\n}\r\n\r\n.nav-container .hamburger-lines .line2 {\r\n  transition: transform 0.2s ease-in-out;\r\n}\r\n\r\n.nav-container .hamburger-lines .line3 {\r\n  transform-origin: 0% 100%;\r\n  transition: transform 0.4s ease-in-out;\r\n}\r\n\r\n.navbar .menu-items {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  padding-top: 120px;\r\n  background: var(--white);\r\n  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);\r\n  height: 100vh;\r\n  transform: translateX(-100%);\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin-left: 0;\r\n  padding-left: 50px;\r\n  transition: transform 0.5s ease-in-out;\r\n  animation: menuIn 3s;\r\n  text-align: center;\r\n  overflow-y: auto;\r\n}\r\n\r\n.navbar .menu-items li {\r\n  margin-bottom: 1.2rem;\r\n  font-size: 1.5rem;\r\n  font-weight: 500;\r\n}\r\n\r\n.nav-container input[type=\"checkbox\"]:checked ~ .menu-items {\r\n  transform: translateX(0);\r\n}\r\n\r\n.nav-container input[type=\"checkbox\"]:checked ~ .hamburger-lines .line1 {\r\n  transform: rotate(45deg);\r\n}\r\n\r\n.nav-container input[type=\"checkbox\"]:checked ~ .hamburger-lines .line2 {\r\n  transform: scaleY(0);\r\n}\r\n\r\n.nav-container input[type=\"checkbox\"]:checked ~ .hamburger-lines .line3 {\r\n  transform: rotate(-45deg);\r\n}\r\n\r\n.nav-container input[type=\"checkbox\"]:checked ~ .logo{\r\n  display: none;\r\n}\r\n\r\n.cart-count {\r\n  position: absolute;\r\n  top: 25px;\r\n  right: 100px;\r\n  background-color: var(--primary-color);\r\n  color: white;\r\n  border-radius: 50%;\r\n  width: 20px;\r\n  height: 20px;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  font-size: 12px;\r\n  font-weight: 600;\r\n}\r\n\r\n.cart-modal {\r\n  position: fixed;\r\n  top: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  z-index: 1000;\r\n  justify-content: flex-end;\r\n  opacity: 0;\r\n  visibility: hidden;\r\n  transition: opacity 0.3s ease, visibility 0.3s ease;\r\n  display: flex;\r\n  animation: menuIn 3s;\r\n  \r\n  &.active {\r\n    opacity: 1;\r\n    visibility: visible;\r\n  }\r\n}\r\n\r\n.cart-content {\r\n  background-color: white;\r\n  width: 100%;\r\n  max-width: 400px;\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  transform: translateX(100%);\r\n  transition: transform 0.3s ease;\r\n  \r\n  .cart-modal.active & {\r\n    transform: translateX(0);\r\n  }\r\n}\r\n\r\n.cart-header {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  padding: 1.5rem;\r\n  border-bottom: 1px solid #eee;\r\n  \r\n  h2 {\r\n    margin: 0;\r\n    font-size: 1.5rem;\r\n  }\r\n  \r\n  .close-cart {\r\n    background: none;\r\n    border: none;\r\n    font-size: 2rem;\r\n    cursor: pointer;\r\n    color: #666;\r\n    \r\n    &:hover {\r\n      color: #000;\r\n    }\r\n  }\r\n}\r\n\r\n.cart-items {\r\n  flex: 1;\r\n  overflow-y: auto;\r\n  padding: 1rem;\r\n}\r\n\r\n.cart-item {\r\n  display: flex;\r\n  align-items: center;\r\n  padding: 1rem;\r\n  border: 1px solid #eee;\r\n  border-radius: 8px;\r\n  margin-bottom: 1rem;\r\n  background-color: #f9f9f9;\r\n  \r\n  .cart-item-image {\r\n    width: 60px;\r\n    height: 60px;\r\n    object-fit: cover;\r\n    border-radius: 4px;\r\n    margin-right: 1rem;\r\n  }\r\n  \r\n  .cart-item-details {\r\n    flex: 1;\r\n    \r\n    h4 {\r\n      margin: 0 0 0.5rem 0;\r\n      font-size: 0.9rem;\r\n      overflow: hidden;\r\n      text-overflow: ellipsis;\r\n      display: -webkit-box;\r\n      -webkit-box-orient: vertical;\r\n    }\r\n    \r\n    .cart-item-price {\r\n      color: var(--primary-color);\r\n      font-weight: 600;\r\n      font-size: 0.9rem;\r\n    }\r\n  }\r\n  \r\n  .cart-item-controls {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 0.5rem;\r\n    \r\n    .quantity-btn {\r\n      background: none;\r\n      border: 1px solid #ddd;\r\n      width: 30px;\r\n      height: 30px;\r\n      border-radius: 4px;\r\n      cursor: pointer;\r\n      display: flex;\r\n      align-items: center;\r\n      justify-content: center;\r\n      \r\n      &:hover {\r\n        background-color: #eee;\r\n      }\r\n    }\r\n    \r\n    .quantity-display {\r\n      min-width: 30px;\r\n      text-align: center;\r\n      font-weight: 600;\r\n    }\r\n    \r\n    .remove-btn {\r\n      background: none;\r\n      border: none;\r\n      color: #ff4444;\r\n      cursor: pointer;\r\n      padding: 0.25rem;\r\n      margin-left: 0.5rem;\r\n      \r\n      &:hover {\r\n        color: #cc0000;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n.empty-cart-message {\r\n  text-align: center;\r\n  color: #666;\r\n  padding: 2rem;\r\n  font-style: italic;\r\n}\r\n\r\n.cart-footer {\r\n  padding: 1.5rem;\r\n  border-top: 1px solid #eee;\r\n  \r\n  .cart-total {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin-bottom: 1rem;\r\n    font-size: 1.2rem;\r\n    font-weight: 600;\r\n    \r\n    span {\r\n      color: var(--primary-color);\r\n    }\r\n  }\r\n  \r\n  .order-button {\r\n    width: 100%;\r\n    background-color: var(--primary-color);\r\n    color: white;\r\n    border: none;\r\n    padding: 1rem;\r\n    border-radius: 6px;\r\n    font-size: 1rem;\r\n    font-weight: 600;\r\n    cursor: pointer;\r\n    transition: background-color 0.3s;\r\n  }\r\n}\r\n\r\n.cart-notification {\r\n  position: fixed;\r\n  top: 100px;\r\n  right: 20px;\r\n  background-color: #4CAF50;\r\n  color: white;\r\n  padding: 1rem 1.5rem;\r\n  border-radius: 4px;\r\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);\r\n  z-index: 1001;\r\n  transform: translateX(150%);\r\n  transition: transform 0.3s ease;\r\n  animation: menuIn 3s;\r\n  \r\n  &.show {\r\n    transform: translateX(0);\r\n  }\r\n}\r\n\r\n@media (max-width: 1023px){\r\n    .container-header{\r\n\t\tdisplay: none;\r\n\t}\r\n\t.menu{\r\n\t\tdisplay: block;\r\n\t}\r\n\r\n\t.contact{\r\n\t\tposition: fixed;\r\n\t\twidth: min(100%, 95%);\r\n\t\tbackground: var(--white);\r\n\t\tz-index: 3;\r\n\t}\r\n\r\n\tmain{\r\n\t\tpadding: 0 1.5rem;\r\n\t}\r\n\r\n\t.product-grid{\r\n\t\tpadding-top: 5rem;\r\n\t\tgrid-template-columns: repeat(auto-fit, minmax(180px, 1fr));\r\n\t}\r\n\r\n\t.tabs{\r\n\t\twidth: auto;\r\n\t}\r\n\t.nav-container{\r\n\t\tbackground: var(--white);\r\n\t\tbox-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);\r\n\t\tz-index: 1001;\r\n\t}\r\n\t.product-card:hover {\r\n\t\ttransform: none;\r\n\t}\r\n  .cart-count{\r\n    top: 0;\r\n    right: 75px;\r\n  }\r\n}\r\n\r\n@media (max-width: 639px){\r\n\t.product-grid{\r\n\t\tgrid-template-columns: repeat(auto-fit, minmax(185px, 1fr));\r\n\t}\r\n\t.contact{\r\n\t\twidth: 100%;\r\n    left: 0px;\r\n    gap: 0;\r\n\t}\r\n\t.navbar .menu-items{\r\n\t\twidth: 100%;\t\r\n\t}\r\n\t\r\n\t.nav-container input[type=\"checkbox\"]:checked ~ .menu-items {\r\n\t\toverflow: hidden;\r\n\t}\r\n\t\r\n\tbody.menu-open {\r\n\t\toverflow: hidden; \r\n\t\theight: 100vh; \r\n\t\twidth: 100%; \r\n\t}\r\n\r\n  .input-search{\r\n    margin-left: 64px;\r\n  }\r\n}\r\n\r\n// Анимация появления карточек товара\r\n.product-grid {\r\n  .product-card {\r\n    opacity: 0;\r\n    transform: translateY(10px);\r\n    animation: fadeIn 1s ease forwards;\r\n    animation-delay: 1s;\r\n    animation-fill-mode: both;\r\n    transition: transform 0.3s ease, box-shadow 0.3s ease;\r\n\r\n    @for $i from 1 through 20 {\r\n      &:nth-child(#{$i}) {\r\n        animation-delay: #{$i * 0.1}s;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n@keyframes fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n@keyframes menuIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1237,7 +1437,7 @@ var code = `<!DOCTYPE html>
                 </div>
                 <div class="icons">
                     <div class="icon">
-                        <a href="#"><i class='bx bx-cart'></i></a>                            
+                        <a href="#" id="cartIcon"><i class='bx bx-cart'></i></a>                            
                     </div>
                     <div class="icon">
                         <a href="#"><i class='bx bx-user'></i></a>
@@ -1337,6 +1537,32 @@ var code = `<!DOCTYPE html>
                 </div>
             </div>
         </main>
+        <!-- Корзина -->
+<div class="cart-modal" id="cartModal">
+  <div class="cart-content">
+    <div class="cart-header">
+      <h2>Корзина</h2>
+      <button class="close-cart">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <!-- Товары будут добавляться сюда динамически -->
+      <div class="empty-cart-message" id="emptyCartMessage">
+        Корзина пуста
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        Итого: <span id="cartTotal">0 ₽</span>
+      </div>
+      <button class="order-button" id="orderButton">Оформить заказ</button>
+    </div>
+  </div>
+</div>
+
+<!-- Уведомление о добавлении в корзину -->
+<div class="cart-notification" id="cartNotification">
+  Товар добавлен в корзину!
+</div>
     </div>
      <footer class="footer">
             <h2>What is Lorem Ipsum?</h2>
@@ -1415,6 +1641,282 @@ const scrollHeader = () => {
 };
 window.addEventListener('scroll', scrollHeader);
 document.addEventListener('DOMContentLoaded', scrollHeader);
+document.addEventListener('DOMContentLoaded', function () {
+  // Функционал скрытия неполных рядов товаров
+  function hideIncompleteRow() {
+    const productGrid = document.querySelector('.product-grid');
+    const productCards = Array.from(document.querySelectorAll('.product-card'));
+    if (productCards.length === 0) return;
+    productCards.forEach(card => card.style.display = '');
+    const gridRect = productGrid.getBoundingClientRect();
+    const cardRects = productCards.map(card => card.getBoundingClientRect());
+    const firstRowTop = cardRects[0].top;
+    let currentRowTop = firstRowTop;
+    let visibleCards = [];
+    cardRects.forEach((rect, index) => {
+      if (Math.abs(rect.top - currentRowTop) < 10) {
+        visibleCards.push(productCards[index]);
+      } else {
+        currentRowTop = rect.top;
+      }
+    });
+    const firstRowCards = cardRects.filter(rect => Math.abs(rect.top - firstRowTop) < 10).length;
+    const fullRows = Math.floor(productCards.length / firstRowCards);
+    const cardsToShow = fullRows * firstRowCards;
+    productCards.forEach((card, index) => {
+      if (index >= cardsToShow) {
+        card.style.display = 'none';
+      }
+    });
+  }
+  setTimeout(hideIncompleteRow, 100);
+  window.addEventListener('resize', hideIncompleteRow);
+
+  // Функционал меню
+  const menuToggle = document.getElementById('menu-toggle');
+  const body = document.body;
+  if (menuToggle) {
+    menuToggle.addEventListener('change', function () {
+      if (this.checked && window.innerWidth <= 639) {
+        body.classList.add('menu-open');
+      } else {
+        body.classList.remove('menu-open');
+      }
+    });
+  }
+
+  // Функция для добавления тени при скролле
+  const scrollHeader = () => {
+    const header = document.getElementById('header');
+    if (header) {
+      if (window.scrollY >= 10) {
+        header.classList.add('bg-header');
+      } else {
+        header.classList.remove('bg-header');
+      }
+    }
+  };
+  window.addEventListener('scroll', scrollHeader);
+  document.addEventListener('DOMContentLoaded', scrollHeader);
+
+  // Функционал корзины
+  class Cart {
+    constructor() {
+      this.items = JSON.parse(localStorage.getItem('cart')) || [];
+      this.init();
+    }
+    init() {
+      this.updateCartCount();
+      this.setupEventListeners();
+      this.renderCart();
+    }
+    setupEventListeners() {
+      // Обработчики для кнопок "Купить"
+      document.querySelectorAll('.buy-button').forEach(button => {
+        button.addEventListener('click', e => {
+          const productCard = e.target.closest('.product-card');
+          if (productCard) {
+            this.addToCart(productCard);
+          }
+        });
+      });
+
+      // Обработчики для иконки корзины
+      const cartIcon = document.querySelector('.bx-cart');
+      if (cartIcon) {
+        cartIcon.closest('.icon').addEventListener('click', e => {
+          e.preventDefault();
+          this.openCart();
+        });
+      }
+
+      // Обработчики для модального окна корзины
+      const closeCartBtn = document.querySelector('.close-cart');
+      if (closeCartBtn) {
+        closeCartBtn.addEventListener('click', () => {
+          this.closeCart();
+        });
+      }
+      const cartModal = document.querySelector('.cart-modal');
+      if (cartModal) {
+        cartModal.addEventListener('click', e => {
+          if (e.target.classList.contains('cart-modal')) {
+            this.closeCart();
+          }
+        });
+      }
+
+      // Обработчик для кнопки оформления заказа
+      const orderButton = document.getElementById('orderButton');
+      if (orderButton) {
+        orderButton.addEventListener('click', () => {
+          this.placeOrder();
+        });
+      }
+    }
+    addToCart(productCard) {
+      const productName = productCard.querySelector('h3');
+      const productPrice = productCard.querySelector('.product-price');
+      const productImage = productCard.querySelector('img');
+      if (!productName || !productPrice || !productImage) {
+        console.error('Не удалось найти информацию о товаре');
+        return;
+      }
+      const product = {
+        id: this.generateId(),
+        name: productName.textContent,
+        price: parseInt(productPrice.textContent.replace(/\s|₽/g, '')),
+        image: productImage.src,
+        quantity: 1
+      };
+      const existingItem = this.items.find(item => item.name === product.name);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        this.items.push(product);
+      }
+      this.saveToLocalStorage();
+      this.updateCartCount();
+      this.renderCart();
+      this.showNotification();
+    }
+    removeFromCart(itemId) {
+      this.items = this.items.filter(item => item.id !== itemId);
+      this.saveToLocalStorage();
+      this.updateCartCount();
+      this.renderCart();
+    }
+    updateQuantity(itemId, change) {
+      const item = this.items.find(item => item.id === itemId);
+      if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+          this.removeFromCart(itemId);
+        } else {
+          this.saveToLocalStorage();
+          this.updateCartCount();
+          this.renderCart();
+        }
+      }
+    }
+    updateCartCount() {
+      const cartIcon = document.querySelector('.bx-cart');
+      if (!cartIcon) return;
+      const cartCount = document.querySelector('.cart-count');
+      const totalItems = this.items.reduce((sum, item) => sum + item.quantity, 0);
+      if (totalItems > 0) {
+        if (!cartCount) {
+          const countElement = document.createElement('div');
+          countElement.className = 'cart-count';
+          cartIcon.closest('.icon').appendChild(countElement);
+        }
+        document.querySelector('.cart-count').textContent = totalItems;
+      } else if (cartCount) {
+        cartCount.remove();
+      }
+    }
+    renderCart() {
+      const cartItems = document.getElementById('cartItems');
+      const emptyCartMessage = document.getElementById('emptyCartMessage');
+      const cartTotal = document.getElementById('cartTotal');
+      const orderButton = document.getElementById('orderButton');
+      if (!cartItems) {
+        console.error('Элемент cartItems не найден');
+        return;
+      }
+      if (this.items.length === 0) {
+        // Показываем сообщение о пустой корзине
+        if (emptyCartMessage) {
+          emptyCartMessage.style.display = 'block';
+        }
+        cartItems.innerHTML = emptyCartMessage ? emptyCartMessage.outerHTML : '<div class="empty-cart-message">Корзина пуста</div>';
+        if (orderButton) {
+          orderButton.disabled = true;
+        }
+        if (cartTotal) {
+          cartTotal.textContent = '0 ₽';
+        }
+        return;
+      }
+
+      // Скрываем сообщение о пустой корзине
+      if (emptyCartMessage) {
+        emptyCartMessage.style.display = 'none';
+      }
+      if (orderButton) {
+        orderButton.disabled = false;
+      }
+
+      // Рассчитываем общую сумму
+      const total = this.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      if (cartTotal) {
+        cartTotal.textContent = `${total.toLocaleString()} ₽`;
+      }
+
+      // Рендерим товары в корзине
+      cartItems.innerHTML = this.items.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h4>${item.name}</h4>
+                        <div class="cart-item-price">${item.price.toLocaleString()} ₽</div>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button class="quantity-btn" onclick="cart.updateQuantity('${item.id}', -1)">-</button>
+                        <span class="quantity-display">${item.quantity}</span>
+                        <button class="quantity-btn" onclick="cart.updateQuantity('${item.id}', 1)">+</button>
+                        <button class="remove-btn" onclick="cart.removeFromCart('${item.id}')">
+                            <i class='bx bx-trash'></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+    }
+    openCart() {
+      const cartModal = document.querySelector('.cart-modal');
+      if (cartModal) {
+        cartModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    closeCart() {
+      const cartModal = document.querySelector('.cart-modal');
+      if (cartModal) {
+        cartModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+    showNotification() {
+      const notification = document.getElementById('cartNotification');
+      if (notification) {
+        notification.classList.add('show');
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 3000);
+      }
+    }
+    placeOrder() {
+      if (this.items.length === 0) return;
+      const total = this.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      alert(`Заказ оформлен!\n\nТоваров: ${this.items.reduce((sum, item) => sum + item.quantity, 0)}\nОбщая сумма: ${total.toLocaleString()} ₽\n\nСпасибо за покупку!`);
+      this.items = [];
+      this.saveToLocalStorage();
+      this.updateCartCount();
+      this.renderCart();
+      this.closeCart();
+    }
+    saveToLocalStorage() {
+      localStorage.setItem('cart', JSON.stringify(this.items));
+    }
+    generateId() {
+      return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    }
+  }
+
+  // Инициализация корзины
+  const cart = new Cart();
+  window.cart = cart; // Делаем глобально доступной для обработчиков в HTML
+});
 
 /***/ }),
 
@@ -1693,4 +2195,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /******/ })()
 ;
-//# sourceMappingURL=index.fca3d9c779ec068ac503.js.map
+//# sourceMappingURL=index.bcea1f86bc00119be707.js.map
